@@ -16,6 +16,10 @@ public class Endereco {
     private Integer cep;
     @Column(name = "numero")
     private Integer numero;
+    @Column(name = "cidade")
+    private String cidade;
+
+
     public Integer getId() {
         return id;
     }
@@ -46,5 +50,24 @@ public class Endereco {
 
     public void setNumero(Integer numero) {
         this.numero = numero;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    @Override
+    public  String toString(){
+        return "Endereco{"+
+                "id="+ id +
+                "logradouro='" + logradouro + "'"+
+                "cep="+ cep +
+                "numero="+ numero +
+                "cidade='" + cidade + "'"+
+                "}";
     }
 }

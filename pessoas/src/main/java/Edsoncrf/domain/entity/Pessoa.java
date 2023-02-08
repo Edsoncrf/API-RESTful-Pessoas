@@ -3,7 +3,6 @@ package Edsoncrf.domain.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 //Entity escaneia a entidade e registra como tabela do bd
@@ -24,7 +23,8 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Set<Endereco> getEnderecos() {
+
+    public Set<Endereco> getEnderecos(){
         return enderecos;
     }
 
