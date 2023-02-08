@@ -18,7 +18,7 @@ public class Pessoa {
     @Column(name = "dataNascimento")
     private String dataNascimento;
     @JsonIgnore
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Endereco> enderecos;
     public Pessoa() {
     }
