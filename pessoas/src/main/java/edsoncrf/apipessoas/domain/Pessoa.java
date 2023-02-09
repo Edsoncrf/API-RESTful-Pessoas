@@ -1,10 +1,14 @@
 package edsoncrf.apipessoas.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 
 import javax.persistence.*;
 import java.util.Set;
-
+@Data
+@AllArgsConstructor
 @Entity
 public class Pessoa {
     @Id
@@ -17,49 +21,6 @@ public class Pessoa {
     @JsonIgnore
     @OneToMany
     private Set<Endereco> enderecos;
-    public Pessoa() {
-    }
-    public Set<Endereco> getEnderecos(){
-        return enderecos;
-    }
-
-    public void setEnderecos(Set<Endereco> enderecos) {
-        this.enderecos = enderecos;
-    }
-
-    public Pessoa(Integer id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
-
-    public Pessoa(String nome) {
-        this.nome = nome;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
     @Override
     public String toString() {
         return "Pessoa{" +
