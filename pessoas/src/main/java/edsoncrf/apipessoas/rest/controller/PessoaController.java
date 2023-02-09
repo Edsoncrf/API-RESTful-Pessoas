@@ -1,7 +1,8 @@
-package Edsoncrf.rest.controller;
+package edsoncrf.apipessoas.rest.controller;
 
-import Edsoncrf.domain.entity.Pessoa;
-import Edsoncrf.domain.repository.Pessoas;
+import edsoncrf.apipessoas.domain.Pessoa;
+import edsoncrf.apipessoas.repository.PessoaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
@@ -13,16 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/pessoas")
 public class PessoaController {
-
-    private Pessoas pessoas;
-
-    public PessoaController(Pessoas pessoas) {
-        this.pessoas = pessoas;
-    }
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
     @GetMapping("{id}")
     public Pessoa getPessoaById(@PathVariable Integer id){
-        return pessoas
+        return pessoaRepository
                 .findById(id)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada"));
@@ -32,15 +29,15 @@ public class PessoaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Pessoa save(@RequestBody Pessoa pessoa){
-        return pessoas.save(pessoa);
+        return pessoaRepository.save(pessoa);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Integer id){
-        pessoas.findById(id)
+        pessoaRepository.findById(id)
                 .map(pessoa -> {
-                    pessoas.delete(pessoa);
+                    pessoaRepository.delete(pessoa);
                     return pessoa;
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -51,11 +48,11 @@ public class PessoaController {
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Integer id, @RequestBody Pessoa pessoa){
-          pessoas
+          pessoaRepository
                     .findById(id)
                     .map(pessoaExistente -> {
                         pessoa.setId(pessoaExistente.getId());
-                        pessoas.save(pessoa);
+                        pessoaRepository.save(pessoa);
                         return pessoaExistente;
                     }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                           "Pessoa não encontrada"));
@@ -69,7 +66,7 @@ public class PessoaController {
                                     .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
         Example example = Example.of(filtro, matcher);
-        return pessoas.findAll(example);
+        return pessoaRepository.findAll(example);
     }
 
 

@@ -1,29 +1,24 @@
-package Edsoncrf.domain.entity;
+package edsoncrf.apipessoas.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Set;
 
-//Entity escaneia a entidade e registra como tabela do bd
 @Entity
-@Table(name = "pessoa")
 public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+
     private Integer id;
-    @Column(name = "nome", length = 100)
+    @Column(length = 100)
     private String nome;
-    @Column(name = "dataNascimento")
-    private String dataNascimento;
+    private String dataNascimento; // TODO passar para date
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     private Set<Endereco> enderecos;
     public Pessoa() {
     }
-
-
     public Set<Endereco> getEnderecos(){
         return enderecos;
     }
@@ -70,7 +65,7 @@ public class Pessoa {
         return "Pessoa{" +
                 "id=" + id +
                 ", dataNascimento='" + dataNascimento +"'"+
-                ", nome='" + nome + '\'' +
-                '}';
+                ", nome='" + nome + "'" +
+                "}";
     }
 }
