@@ -16,6 +16,10 @@ public class Endereco {
     private Integer cep;
     private Integer numero;
     private String cidade;
+
+    public Endereco() {
+    }
+
     @Override
     public  String toString(){
         return "Endereco{"+

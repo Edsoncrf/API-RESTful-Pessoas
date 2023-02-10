@@ -6,6 +6,7 @@ import lombok.Data;
 
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 @Data
 @AllArgsConstructor
@@ -17,10 +18,14 @@ public class Pessoa {
     private Integer id;
     @Column(length = 100)
     private String nome;
-    private String dataNascimento; // TODO passar para date
+    private Date dataNascimento;
     @JsonIgnore
     @OneToMany
     private Set<Endereco> enderecos;
+
+    public Pessoa() {
+    }
+
     @Override
     public String toString() {
         return "Pessoa{" +
